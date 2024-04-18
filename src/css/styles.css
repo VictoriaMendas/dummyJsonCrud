@@ -21,3 +21,23 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.list-users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px;
+}
+.list-user-item {
+  border-radius: 25%;
+  border: solid 1px blue;
+  box-shadow: #242424;
+}
+.list-user-title {
+  text-align: center;
+}
+.modal-img {
+  width: 800px;
+  height: 600px;
+}
