@@ -1,15 +1,14 @@
 import axios from 'axios';
-import { renderUserCard } from './render';
 axios.defaults.baseURL = 'https://dummyjson.com/';
 
 export function getUsers() {
-  return axios('users').then(({ data }) => {
-    renderUserCard(data.users);
+  return axios('users?limit=18').then(({ data }) => {
+    return data.users;
   });
 }
 
-export function getOneUser() {
-  return axios('users/?id').then(({ data }) => {
+export function getUserById(id) {
+  return axios(`users/${id}`).then(({ data }) => {
     return data;
   });
 }

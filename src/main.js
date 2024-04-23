@@ -1,17 +1,9 @@
-import { renderUserCard } from './js/render.js';
-// import { renderCard } from './js/axios-api.js';
-
-import { getOneUser, getUsers } from './js/axios-api';
-import { onPicClick, onEscClick } from './js/render';
+import { renderUsers } from './js/render.js';
+import { getUsers } from './js/axios-api';
 import { refs } from './js/refs.js';
+import { onUserListItemClick, onBackdropClick } from './js/handlers.js';
 
-refs.usersList.addEventListener('click', onPicClick);
+refs.usersList.addEventListener('click', onUserListItemClick);
+refs.backdrop.addEventListener('click', onBackdropClick);
 
-refs.usersList.addEventListener('click', onEscClick);
-
-getUsers().then(users => {
-  return users;
-});
-getOneUser().then(user => {
-  return user;
-});
+getUsers().then(users => renderUsers(users));
