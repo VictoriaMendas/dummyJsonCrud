@@ -1,13 +1,14 @@
 import { getUserById } from './axios-api';
-import { saveToLocalStorage } from './localStorage';
+import { saveToLocalStorage, loadfromLocalStorage } from './localStorage';
 import { closeModal, openModal } from './modal';
 import { refs } from './refs';
 import { renderUserInModal } from './render';
 import { state } from './state';
+import { saveUserOnFavPage } from '../favorites';
 // import { renderOneUser } from './render';
+let favorite;
 
 export function onUserListItemClick(e) {
-  console.log(e.target);
   if (e.target.nodeName !== 'IMG') {
     return;
   }
@@ -20,13 +21,8 @@ export function onUserListItemClick(e) {
     openModal();
 
     renderUserInModal(user, refs.modal);
-    const favorite = document.querySelector('.add-favorite-btn');
+    favorite = document.querySelector('.add-favorite-btn');
     favorite.addEventListener('click', onAddToFavBtnClick);
-    if (favorite) {
-      favorite.textContent = 'add to favorites';
-    } else {
-      favorite.textContent = 'remove from favorites';
-    }
   });
 }
 
@@ -34,7 +30,6 @@ export function onBackdropClick(e) {
   if (e.target === e.currentTarget) {
     closeModal();
   }
-
   if (e.target.classList.contains('modal-close-btn')) {
     closeModal();
   }
@@ -46,17 +41,19 @@ export function onEscPress(e) {
     closeModal();
   }
 }
-function onAddToFavBtnClick(e) {
-  //   console.log(state.favoriteUser);
+let addedToFavoriteUsers;
 
-  const addedToFavoriteUsers = state.favoriteUsers.find(
+export function onAddToFavBtnClick(e) {
+  addedToFavoriteUsers = state.favoriteUsers.find(
     user => user.id === state.favoriteUser.id
   );
+  console.log(addedToFavoriteUsers);
 
   if (!addedToFavoriteUsers) {
     state.favoriteUsers.push(state.favoriteUser);
-
     saveToLocalStorage(state.FAVORITES_KEY, state.favoriteUsers);
+    // favorite.textContent = ' add to favorite';
+    // favorite.disabled = true;
   }
 }
 // При додавані улюбленого кнопка add to fav має мінятися на  remove from fav
