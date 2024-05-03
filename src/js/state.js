@@ -1,3 +1,5 @@
+import { loadfromLocalStorage } from './localStorage';
+
 export const state = {
   favoriteUser: null,
   favoriteUsers: [],

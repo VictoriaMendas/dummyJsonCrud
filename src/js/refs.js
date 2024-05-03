@@ -3,4 +3,5 @@ export const refs = {
   userItem: document.querySelector('.list-user-item'),
   backdrop: document.querySelector('.backdrop'),
   modal: document.querySelector('.modal'),
+  favoritesList: document.querySelector('.favorites'),
 };

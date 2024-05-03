@@ -2,8 +2,11 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 import { refs } from './refs';
+import { loadfromLocalStorage } from './localStorage';
+import { state } from './state';
+import { checkUserInLocalStorage } from './helpers';
 
-export function renderUsers(users) {
+export function renderUsers(users, element) {
   const markup = users
     .map(({ id, lastName, firstName, image, phone, email }) => {
       return `
@@ -22,7 +25,7 @@ export function renderUsers(users) {
     })
     .join('');
 
-  refs.usersList.innerHTML = markup;
+  element.innerHTML = markup;
 }
 
 //  Зпробити модалку при кліку на картку і збільшити фото з повною інфою
@@ -55,9 +58,11 @@ let instance = null;
 // }
 
 export function renderUserInModal(
-  { image, firstName, lastName, maidenName, age, email, phone, birthDate },
+  { image, firstName, lastName, maidenName, age, email, phone, birthDate, id },
   modal
 ) {
+  const isUserInLS = checkUserInLocalStorage(id, state.FAVORITES_KEY);
+
   const markup = `<div class="modal-wrapper"><img class="modal-img" src="${image}" width="${300}" height="${400}">
       <div class="modal-info">
       <p>FirstName: ${firstName}</p>
@@ -68,7 +73,9 @@ export function renderUserInModal(
       <p>Phone: ${phone}</p>
       <p>Birthdate: ${birthDate}</p>
 
-      <button type="button" class="add-favorite-btn">Add to favorite</button>
+      <button type="button" class="add-favorite-btn">${
+        isUserInLS ? 'Remove from favorite' : 'Add to favorite'
+      }</button>
       </div>
       <button class="modal-close-btn">X</button>
       </div>`;

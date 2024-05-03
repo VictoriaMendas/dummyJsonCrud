@@ -22,7 +22,8 @@
   -webkit-text-size-adjust: 100%;
 }
 
-.list-users {
+.list-users,
+.favorites {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
