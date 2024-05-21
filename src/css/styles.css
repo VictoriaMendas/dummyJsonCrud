@@ -21,7 +21,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+.container {
+  width: 320px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
 .list-users,
 .favorites {
   display: flex;
@@ -34,6 +38,7 @@
   border-radius: 25%;
   border: solid 1px blue;
   box-shadow: #242424;
+  padding: 10px;
 }
 .list-user-title {
   text-align: center;
@@ -84,4 +89,49 @@
   justify-content: center;
   background-color: transparent;
   border: 1px solid black;
+}
+.header-link {
+  display: flex;
+  justify-content: center;
+
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  width: 80px;
+  position: relative;
+  text-decoration: none;
+}
+.header-link:hover {
+  color: rgb(214, 81, 33);
+}
+
+.header-link::after {
+  position: absolute;
+  content: '';
+  display: block;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 0%;
+  transform: scale(0);
+  transition: width 250ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.header-link:hover::after,
+.header-link:focus::after {
+  width: 100%;
+  transform: scaleX(1);
+  background-color: rgb(214, 81, 33);
+  color: rgb(214, 81, 33);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+  .header {
+    display: flex;
+    justify-content: center;
+  }
+  .list-users {
+  }
 }

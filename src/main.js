@@ -8,5 +8,6 @@ import { loadfromLocalStorage } from './js/localStorage.js';
 state.favoriteUsers = loadfromLocalStorage(state.FAVORITES_KEY) || [];
 refs.usersList.addEventListener('click', onUserListItemClick);
 refs.backdrop.addEventListener('click', onBackdropClick);
+// refs.messageOnfavouritePage.addEventListener()
 
 getUsers().then(users => renderUsers(users, refs.usersList));
